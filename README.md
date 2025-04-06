@@ -56,11 +56,11 @@ sudo apt update && sudo apt install -y python3 python3-venv python3-pip curl wge
 ```
 3. **Install Node.js and npm if not installed already**  
 ```bash
-curl -sSL https://raw.githubusercontent.com/zunxbt/installation/main/node.sh | bash
+curl -sSL https://raw.githubusercontent.com/whalepiz/installation/main/node.sh | bash
 ```
 4. **Clone this repository**
 ```bash
-cd $HOME && [ -d rl-swarm ] && rm -rf rl-swarm; git clone https://github.com/zunxbt/rl-swarm.git && cd rl-swarm
+cd $HOME && [ -d rl-swarm ] && rm -rf rl-swarm; git clone https://github.com/whalepiz/rl-swarm.git && cd rl-swarm
 ```
 5. **Create a `screen` session**
 ```bash
