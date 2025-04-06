@@ -1,4 +1,4 @@
-<h2 align=center>Gensyn Testnet Node Guide</h2>
+<h2 align=center>Gensyn Testnet Node Guide - CPU </h2>
 
 ## 💻 System Requirements
 
@@ -6,9 +6,6 @@
 |-------------------------------------|---------------------------------------------------------------------------------------------|
 | **CPU Architecture**                | `arm64` or `amd64`                                                                          |
 | **Recommended RAM**                 | 25 GB                                                                                       |
-| **CUDA Devices (Recommended)**      | `RTX 3090`, `RTX 4090`, `A100`, `H100`                                                      |
-| **Python Version**                  | Python >= 3.10 (For Mac, you may need to upgrade) 
-
 
 # Install Linux Ubuntu on Windows using WSL
 
