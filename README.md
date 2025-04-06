@@ -1,5 +1,7 @@
 <h2 align=center>Gensyn Testnet Node Guide - CPU </h2>
 
+**Follow Me: https://x.com/WhalePiz**
+
 ## 💻 System Requirements
 
 | Requirement                        | Details                                                                                      |
