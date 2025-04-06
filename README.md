@@ -10,17 +10,40 @@
 | **Python Version**                  | Python >= 3.10 (For Mac, you may need to upgrade) 
 
 
-## 🌐 Rent GPU
-- Visit : [Quick Pod Website](https://console.quickpod.io?affiliate=64e0d2b2-59ee-4989-a05f-f4c3b6dbb2e4)
-- Sign Up using email address
-- Go to your email and verify your Quick Pod account
-- Click on `Add` button in the corner to deposit fund
-- You can deposit using crypto currency (from metamask) or using Credit card
-- Now go to `template` section and then select `Ubuntu 22.04 jammy` in the below
-- Now click on `Select GPU` and search `RTX 4090` and choose it
-- Now choose a GPU and click on `Create POD` button
-- Your GPU server will be deployed soon
-- Now click on `Connect` option and then choose `Connect to web terminal`
+# Install Linux Ubuntu on Windows using WSL
+
+> Certain tasks, such as `Contribute Ceremony` or `Contract Deployments`, sometimes don't require a cloud server (VPS). Instead, installing a Linux distribution like Ubuntu on Windows can be sufficient
+>
+> In this Guide, I'll tell you how to Install Linux (Ubuntu distribution) on Windows using WSL
+
+## Step 1: Enable WSL
+
+1. Opening Windows Powershell Terminal
+![Screenshot_357](https://github.com/user-attachments/assets/42e29c7f-9021-433c-87c4-2f76189b1322)
+
+2. Run the WSL Installation Command:
+```
+wsl --install
+```
+* It may ask you to choose a username and password
+
+3. Restart Your Computer:
+  
+After the installation completes, you may need to restart your computer
+
+## Step 2: Install Ubuntu
+
+1. Open Microsoft Store:
+
+After restarting, open the Microsoft Store from the Start menu.
+
+2. Search for Ubuntu:
+
+In the Store, type "Ubuntu" in the search bar. You’ll see various versions like Ubuntu 20.04 LTS, Ubuntu 22.04 LTS, etc
+
+3. Select and Install:
+
+Click on the version you want to install, then click the Get or Install button
 
 ## 📥 Installation
 
