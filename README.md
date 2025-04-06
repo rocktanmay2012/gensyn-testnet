@@ -42,6 +42,8 @@ In the Store, type "Ubuntu" in the search bar. You’ll see various versions lik
 
 Click on the version you want to install, then click the Get or Install button
 
+## Once Ubuntu Linux is installed on Windows, start running Node
+
 ## 📥 Installation
 
 1. **Install `sudo`**
