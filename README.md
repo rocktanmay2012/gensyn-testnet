@@ -79,5 +79,3 @@ python3 -m venv .venv && . .venv/bin/activate && ./run_rl_swarm.sh
 
 ![Screenshot 2025-04-01 061641](https://github.com/user-attachments/assets/b5ed9645-16a2-4911-8a73-97e21fdde274)
 
-7. **Detach from `screen session`**
-- Use `Ctrl + A` and then press `D` to detach from this screen session.
