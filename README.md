@@ -1,4 +1,11 @@
-<h2 align=center>Gensyn Testnet Node Guide - CPU </h2>
+<h2 align=center>Gensyn Testnet Node Guide - CPU + GPU </h2>
+
+![image](https://github.com/user-attachments/assets/833d8052-f0a2-43d0-9b8e-96e428e063db)
+
+
+**Note: - For personal computers that have not installed Linux Ubuntu on Windows, follow this step. 
+        - For computers that already have Linux Ubuntu on Windows or VPS, skip this step and proceed to the Installation NODE section.**
+
 
 **Follow Me: https://x.com/WhalePiz**
 
@@ -8,6 +15,8 @@
 |-------------------------------------|---------------------------------------------------------------------------------------------|
 | **CPU Architecture**                | `arm64` or `amd64`                                                                          |
 | **Recommended RAM**                 | 25 GB                                                                                       |
+| **CUDA Devices (Recommended)**      | `RTX 3090`, `RTX 4090`, `A100`, `H100`                                                      |
+| **Python Version**                  | Python >= 3.10 (For Mac, you may need to upgrade)                                                                                     |
 
 # Install Linux Ubuntu on Windows using WSL
 
@@ -46,7 +55,7 @@ Click on the version you want to install, then click the Get or Install button
 
 ## Once Ubuntu Linux is installed on Windows, start running Node
 
-## 📥 Installation
+## 📥 Installation NODE
 
 1. **Install `sudo`**
 ```bash
