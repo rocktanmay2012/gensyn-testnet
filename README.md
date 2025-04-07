@@ -50,7 +50,7 @@ Click on the version you want to install, then click the Get or Install button
 
 1. **Install `sudo`**
 ```bash
-apt update && apt install -y sudo
+sudo apt update && sudo apt install -y sudo
 ```
 2. **Install other dependencies**
 ```bash
