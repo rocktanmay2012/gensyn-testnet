@@ -1,5 +1,7 @@
 <h2 align=center>Gensyn Testnet Node Guide - CPU + GPU </h2>
 
+<h2Note: If you are using GPU, choose the GPU command. If you are using CPU, choose the CPU command.</h2>
+
 ![image](https://github.com/user-attachments/assets/833d8052-f0a2-43d0-9b8e-96e428e063db)
 
 
