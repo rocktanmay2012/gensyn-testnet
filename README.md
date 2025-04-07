@@ -60,15 +60,20 @@ sudo apt update && sudo apt install -y python3 python3-venv python3-pip curl wge
 ```bash
 curl -sSL https://raw.githubusercontent.com/whalepiz/installation/main/node.sh | bash
 ```
-4. **Clone this repository**
+4. **Clone this repository [ For CPU, you use this command ]**
 ```bash
 cd $HOME && [ -d rl-swarm ] && rm -rf rl-swarm; git clone https://github.com/whalepiz/rl-swarm.git && cd rl-swarm
 ```
-5. **Create a `screen` session**
+5. **Clone this repository [For GPU, you use this command]**
+```bash
+cd $HOME && [ -d rl-swarm ] && rm -rf rl-swarm; git clone https://github.com/whalepiz/GPU_rl-swarm.git rl-swarm && cd rl-swarm
+```
+
+6. **Create a `screen` session**
 ```bash
 screen -S gensyn
 ```
-6. **Run the swarm**
+7. **Run the swarm**
 ```bash
 python3 -m venv .venv && . .venv/bin/activate && ./run_rl_swarm.sh
 ```
