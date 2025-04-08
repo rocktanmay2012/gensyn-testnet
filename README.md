@@ -95,3 +95,55 @@ python3 -m venv .venv && . .venv/bin/activate && ./run_rl_swarm.sh
 
 ![Screenshot 2025-04-01 061641](https://github.com/user-attachments/assets/b5ed9645-16a2-4911-8a73-97e21fdde274)
 
+
+# Backup Instructions for `swarm.pem`
+
+## VPS:
+1. Use **Mobaxterm** to establish a connection to your VPS.
+2. Once connected, transfer the `swarm.pem` file from the following directory to your local machine:
+   ```
+   /root/rl-swarm/swarm.pem
+   ```
+
+## WSL (Windows Subsystem for Linux):
+1. Open **Windows Explorer** and search for `\wsl.localhost` to access your Ubuntu directories.
+2. The primary directories are:
+   - If installed under a specific username:
+     ```
+     \wsl.localhost\Ubuntu\home\<your_username>\rl-swarm
+     ```
+   - If installed under root:
+     ```
+     \wsl.localhost\Ubuntu\root\rl-swarm
+     ```
+3. Locate the `swarm.pem` file within the `rl-swarm` folder.
+
+## GPU Servers (e.g., Hyperbolic):
+1. Open **Windows PowerShell** and execute the following command to connect to your GPU server:
+   ```
+   sftp -P PORT ubuntu@xxxx.hyperbolic.xyz
+   ```
+   - Replace `ubuntu@xxxx.hyperbolic.xyz` with your GPU server's hostname.
+   - Replace `PORT` with the specific port from your server's SSH connection details.
+   - The username might vary (e.g., `root`), depending on your server configuration.
+
+2. After establishing the connection, you will see the `sftp>` prompt.
+3. To navigate to the folder containing `swarm.pem`, use the `cd` command:
+   ```
+   cd /home/ubuntu/rl-swarm
+   ```
+
+4. To download the file, use the `get` command:
+   ```
+   get swarm.pem
+   ```
+   The file will be saved in the directory where you ran the `sftp` command, typically:
+   - If you executed the command in PowerShell, the file will be stored in `C:\Users\<your_pc_username>`.
+
+5. Once the download is complete, type `exit` to close the connection.
+
+---
+
+You've successfully backed up the `swarm.pem` file from your VPS, WSL, or GPU server.
+
+
