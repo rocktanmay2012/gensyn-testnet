@@ -75,7 +75,7 @@ screen -S gensyn
 ```
 5. **Clone this repository**
 ```bash
-git clone https://github.com/whalepiz/rl-swarm.git/
+cd $HOME && git clone https://github.com/whalepiz/rl-swarm.git
 cd rl-swarm
 ```
 6. **Create a `screen` session**
