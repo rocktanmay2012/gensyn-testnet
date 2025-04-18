@@ -1,6 +1,6 @@
-<h2 align=center>Gensyn Testnet Node Guide - CPU + GPU </h2>
+<h2 align=center>Gensyn Testnet Node Guide - CPU </h2>
 
-<h2> Note: If you are using GPU, choose the GPU command. If you are using CPU, choose the CPU command.</h2>
+
 
 ![image](https://github.com/user-attachments/assets/833d8052-f0a2-43d0-9b8e-96e428e063db)
 
@@ -71,23 +71,16 @@ sudo apt update && sudo apt install -y python3 python3-venv python3-pip curl wge
 ```bash
 curl -sSL https://raw.githubusercontent.com/whalepiz/installation/main/node.sh | bash
 ```
-4. **Clone this repository [ For CPU, you use this command ]**
-```bash
-cd $HOME && [ -d rl-swarm ] && rm -rf rl-swarm; git clone https://github.com/whalepiz/rl-swarm.git && cd rl-swarm
-```
-5. **Clone this repository [For GPU, you use this command]**
-```bash
-cd $HOME && [ -d rl-swarm ] && rm -rf rl-swarm; git clone https://github.com/whalepiz/GPU_rl-swarm.git rl-swarm && cd rl-swarm
-```
 
-6. **Create a `screen` session**
+4. **Create a `screen` session**
 ```bash
 screen -S gensyn
 ```
-7. **Run the swarm**
+5. **Clone this repository [ For CPU, you use this command ]**
 ```bash
-python3 -m venv .venv && . .venv/bin/activate && ./run_rl_swarm.sh
+cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/gensyn.sh && ./gensyn-testnet/gensyn.sh
 ```
+
 - It will ask some questions, you should send response properly
 - ```Would you like to connect to the Testnet? [Y/n]``` : Write `Y`
 - ```Would you like to push models you train in the RL swarm to the Hugging Face Hub? [y/N]``` : Write `N`
