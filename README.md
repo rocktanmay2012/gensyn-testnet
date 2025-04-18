@@ -69,14 +69,13 @@ sudo apt update && sudo apt install -y python3 python3-venv python3-pip curl wge
 curl -sSL https://raw.githubusercontent.com/whalepiz/installation/main/node.sh | bash
 ```
 
-4. **Create a `screen` session**
+4. **Clone this repository**
+```bash
+cd $HOME && [ -d rl-swarm ] && rm -rf rl-swarm; git clone https://github.com/whalepiz/rl-swarm.git && cd rl-swarm
+```
+5. **Create a `screen` session**
 ```bash
 screen -S gensyn
-```
-5. **Clone this repository**
-```bash
-cd $HOME && git clone https://github.com/whalepiz/rl-swarm.git
-cd rl-swarm
 ```
 6. **Create a `screen` session**
 ```bash
