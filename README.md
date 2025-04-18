@@ -2,9 +2,6 @@
 
 
 
-![image](https://github.com/user-attachments/assets/833d8052-f0a2-43d0-9b8e-96e428e063db)
-
-
 **Note: - For personal computers that have not installed Linux Ubuntu on Windows, follow this step. 
         - For computers that already have Linux Ubuntu on Windows or VPS, skip this step and proceed to the Installation NODE section.**
 
