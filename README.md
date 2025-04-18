@@ -73,11 +73,17 @@ curl -sSL https://raw.githubusercontent.com/whalepiz/installation/main/node.sh |
 ```bash
 screen -S gensyn
 ```
-5. **Clone this repository [ For CPU, you use this command ]**
+5. **Clone this repository**
 ```bash
-cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/gensyn.sh && ./gensyn-testnet/gensyn.sh
+git clone https://github.com/whalepiz/rl-swarm.git/
+cd rl-swarm
 ```
-
+6. **Create a `screen` session**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+./run_rl_swarm.sh
+```
 - It will ask some questions, you should send response properly
 - ```Would you like to connect to the Testnet? [Y/n]``` : Write `Y`
 - ```Would you like to push models you train in the RL swarm to the Hugging Face Hub? [y/N]``` : Write `N`
