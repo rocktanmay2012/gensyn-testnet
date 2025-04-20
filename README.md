@@ -52,8 +52,9 @@ In the Store, type "Ubuntu" in the search bar. You’ll see various versions lik
 
 Click on the version you want to install, then click the Get or Install button
 
-## Once Ubuntu Linux is installed on Windows, start running Node
 
+
+## Run node with CPU
 ## 📥 Installation NODE
 
 1. **Install `sudo`**
@@ -90,6 +91,30 @@ source .venv/bin/activate
 
 ![Screenshot 2025-04-01 061641](https://github.com/user-attachments/assets/b5ed9645-16a2-4911-8a73-97e21fdde274)
 
+
+
+
+## 💻 Run node with GPU
+1. **Install `sudo`**
+```bash
+apt update && apt install -y sudo
+```
+2. **Install other dependencies**
+```bash
+sudo apt update && sudo apt install -y python3 python3-venv python3-pip curl wget screen git lsof nano unzip
+```
+3. **Install Node.js and npm`**
+```bash
+curl -sSL https://raw.githubusercontent.com/whalepiz/installation/main/node.sh | bash
+```
+4. **Create a screen session**
+```bash
+screen -S gensyn
+```
+5. **Create a screen session**
+```bash
+cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/gensyn.sh && ./gensyn-testnet/gensyn.sh
+```
 
 # Backup Instructions for `swarm.pem`
 
