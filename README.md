@@ -8,6 +8,13 @@
 
 **Follow Me: https://x.com/WhalePiz**
 
+**Telegram Group: https://t.me/Nexgenexplore**
+## PLEASE SELECT THE HARDWARE YOU WANT TO RUN ON
+
+# **1. CPU [INSTRUCTIONS FOR RUNNING WITH CPU](https://github.com/whalepiz/gensyn-testnet?tab=readme-ov-file#run-node-with-cpu)**
+
+# **2. GPU [INSTRUCTIONS FOR RUNNING WITH GPU](https://github.com/whalepiz/gensyn-testnet?tab=readme-ov-file#-run-node-with-gpu)**
+
 ## 💻 System Requirements
 
 | Requirement                        | Details                                                                                      |
