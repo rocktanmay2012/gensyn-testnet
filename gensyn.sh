@@ -58,7 +58,7 @@ fi
 
 echo -e "${BOLD}${YELLOW}[✓] Setting up Python virtual environment...${NC}"
 python3 -m venv .venv
-source .venv/bin/activate
+. .venv/bin/activate
 
 echo -e "${BOLD}${YELLOW}[✓] Running rl-swarm...${NC}"
 ./run_rl_swarm.sh
