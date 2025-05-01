@@ -60,5 +60,10 @@ echo -e "${BOLD}${YELLOW}[✓] Setting up Python virtual environment...${NC}"
 python3 -m venv .venv
 . .venv/bin/activate
 
+#echo -e "${BOLD}${YELLOW}[✓] Running rl-swarm...${NC}"
+#./run_rl_swarm.sh
+
 echo -e "${BOLD}${YELLOW}[✓] Running rl-swarm...${NC}"
+chmod +x run_rl_swarm.sh || { echo -e "${BOLD}${RED}[✗] Failed to make run_rl_swarm.sh executable.${NC}"; exit 1; }
 ./run_rl_swarm.sh
+
