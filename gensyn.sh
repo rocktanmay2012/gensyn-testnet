@@ -57,7 +57,7 @@ if [ -n "$VIRTUAL_ENV" ]; then
 fi
 
 echo -e "${BOLD}${YELLOW}[✓] Setting up Python virtual environment...${NC}"
-python3 -m venv .venv
+python3.10 -m venv .venv
 . .venv/bin/activate
 
 #echo -e "${BOLD}${YELLOW}[✓] Running rl-swarm...${NC}"
