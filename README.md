@@ -11,9 +11,9 @@
 **Telegram Group: https://t.me/Nexgenexplore**
 ## PLEASE SELECT THE HARDWARE YOU WANT TO RUN ON
 
-# **1. CPU [INSTRUCTIONS FOR RUNNING WITH CPU](https://github.com/whalepiz/gensyn-testnet?tab=readme-ov-file#run-node-with-cpu)**
+<!-- # **1. CPU [INSTRUCTIONS FOR RUNNING WITH CPU](https://github.com/whalepiz/gensyn-testnet?tab=readme-ov-file#run-node-with-cpu)**
 
-# **2. GPU [INSTRUCTIONS FOR RUNNING WITH GPU](https://github.com/whalepiz/gensyn-testnet?tab=readme-ov-file#-run-node-with-gpu)**
+# **2. GPU [INSTRUCTIONS FOR RUNNING WITH GPU](https://github.com/whalepiz/gensyn-testnet?tab=readme-ov-file#-run-node-with-gpu)** -->
 
 ## 💻 System Requirements
 
@@ -61,7 +61,7 @@ Click on the version you want to install, then click the Get or Install button
 
 
 
-## Run node with CPU
+<!-- ## Run node with CPU
 ## 📥 Installation NODE
 
 1. **Install `sudo`**
@@ -91,12 +91,12 @@ cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensy
 - ```Would you like to push models you train in the RL swarm to the Hugging Face Hub? [y/N]``` : Write `N`
 - When you will see interface like this, you can detach from this screen session
 
-![Screenshot 2025-04-01 061641](https://github.com/user-attachments/assets/b5ed9645-16a2-4911-8a73-97e21fdde274)
+![Screenshot 2025-04-01 061641](https://github.com/user-attachments/assets/b5ed9645-16a2-4911-8a73-97e21fdde274) -->
 
 
 
 
-## 💻 Run node with GPU
+## 💻 Run node
 1. **Install `sudo`**
 ```bash
 apt update && apt install -y sudo
