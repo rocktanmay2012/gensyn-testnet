@@ -24,7 +24,7 @@
 | **CUDA Devices (Recommended)**      | `RTX 3090`, `RTX 4090`, `A100`, `H100`                                                      |
 | **Python Version**                  | Python >= 3.10 (For Mac, you may need to upgrade)                                                                                     |
 
-# Install Linux Ubuntu on Windows using WSL
+<!-- # Install Linux Ubuntu on Windows using WSL
 
 > Certain tasks, such as `Contribute Ceremony` or `Contract Deployments`, sometimes don't require a cloud server (VPS). Instead, installing a Linux distribution like Ubuntu on Windows can be sufficient
 >
@@ -59,7 +59,7 @@ In the Store, type "Ubuntu" in the search bar. You’ll see various versions lik
 
 Click on the version you want to install, then click the Get or Install button
 
-
+-->
 
 <!-- ## Run node with CPU
 ## 📥 Installation NODE
