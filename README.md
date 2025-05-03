@@ -1,4 +1,4 @@
-<h2 align=center>Gensyn Testnet Node Guide </h2>
+<h2 align=center>Gensyn Testnet Node Guide - CPU - GPU</h2>
 
 
 
@@ -11,9 +11,9 @@
 **Telegram Group: https://t.me/Nexgenexplore**
 ## PLEASE SELECT THE HARDWARE YOU WANT TO RUN ON
 
-<!-- # **1. CPU [INSTRUCTIONS FOR RUNNING WITH CPU](https://github.com/whalepiz/gensyn-testnet?tab=readme-ov-file#run-node-with-cpu)**
+ **1. CPU [INSTRUCTIONS FOR RUNNING WITH CPU](https://github.com/whalepiz/gensyn-testnet?tab=readme-ov-file#run-node-with-cpu)**
 
-# **2. GPU [INSTRUCTIONS FOR RUNNING WITH GPU](https://github.com/whalepiz/gensyn-testnet?tab=readme-ov-file#-run-node-with-gpu)** -->
+ **2. GPU [INSTRUCTIONS FOR RUNNING WITH GPU](https://github.com/whalepiz/gensyn-testnet?tab=readme-ov-file#-run-node-with-gpu)** 
 
 ## 💻 System Requirements
 
@@ -24,7 +24,7 @@
 | **CUDA Devices (Recommended)**      | `RTX 3090`, `RTX 4090`, `A100`, `H100`                                                      |
 | **Python Version**                  | Python >= 3.10 (For Mac, you may need to upgrade)                                                                                     |
 
-<!-- # Install Linux Ubuntu on Windows using WSL
+Install Linux Ubuntu on Windows using WSL
 
 > Certain tasks, such as `Contribute Ceremony` or `Contract Deployments`, sometimes don't require a cloud server (VPS). Instead, installing a Linux distribution like Ubuntu on Windows can be sufficient
 >
@@ -59,9 +59,9 @@ In the Store, type "Ubuntu" in the search bar. You’ll see various versions lik
 
 Click on the version you want to install, then click the Get or Install button
 
--->
 
-<!-- ## Run node with CPU
+
+ ## Run node with CPU
 ## 📥 Installation NODE
 
 1. **Install `sudo`**
@@ -91,12 +91,12 @@ cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensy
 - ```Would you like to push models you train in the RL swarm to the Hugging Face Hub? [y/N]``` : Write `N`
 - When you will see interface like this, you can detach from this screen session
 
-![Screenshot 2025-04-01 061641](https://github.com/user-attachments/assets/b5ed9645-16a2-4911-8a73-97e21fdde274) -->
+![Screenshot 2025-04-01 061641](https://github.com/user-attachments/assets/b5ed9645-16a2-4911-8a73-97e21fdde274)
 
 
 
 
-## 💻 Run node
+## 💻 Run node GPU
 1. **Install `sudo`**
 ```bash
 apt update && apt install -y sudo
