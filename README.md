@@ -96,7 +96,7 @@ cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensy
 
 
 
-## 💻 Run node GPU
+## 💻 Run node with GPU
 1. **Install `sudo`**
 ```bash
 apt update && apt install -y sudo
