@@ -57,7 +57,17 @@ if [ -n "$VIRTUAL_ENV" ]; then
 fi
 
 echo -e "${BOLD}${YELLOW}[✓] Setting up Python virtual environment...${NC}"
-python3.10 -m venv .venv
+#python3.10 -m venv .venv
+# Thành phiên bản an toàn hơn
+if ! command -v python3.10 &> /dev/null; then
+    echo -e "${BOLD}${RED}[✗] python3.10 not found. Installing...${NC}"
+    sudo apt update && sudo apt install -y python3.10 python3.10-venv
+fi
+
+python3.10 -m venv .venv || {
+    echo -e "${BOLD}${RED}[✗] Failed to create virtual environment${NC}"
+    exit 1
+}
 source .venv/bin/activate
 echo -e "${BOLD}${YELLOW}[✓] Removing previous PyTorch installations...${NC}"
 pip uninstall -y torch torchvision torchaudio 2>/dev/null || true
