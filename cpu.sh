@@ -59,6 +59,13 @@ fi
 echo -e "${BOLD}${YELLOW}[✓] Setting up Python virtual environment...${NC}"
 python3.10 -m venv .venv
 source .venv/bin/activate
-pip install --upgrade torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+echo -e "${BOLD}${YELLOW}[✓] Removing previous PyTorch installations...${NC}"
+pip uninstall -y torch torchvision torchaudio 2>/dev/null || true
+
+echo -e "${BOLD}${YELLOW}[✓] Installing fresh PyTorch packages...${NC}"
+pip install --upgrade --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu || {
+    echo -e "${BOLD}${RED}[✗] Failed to install PyTorch${NC}"
+    exit 1
+}
 echo -e "${BOLD}${YELLOW}[✓] Running rl-swarm...${NC}"
 ./run_rl_swarm.sh
