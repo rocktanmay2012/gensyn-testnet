@@ -58,7 +58,7 @@ fi
 
 # Tạo virtual environment
 rm -rf .venv/  # Linux/macOS
-python -m venv .venv
+python3 -m venv .venv
 source .venv/bin/activate
 pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cpu
 
