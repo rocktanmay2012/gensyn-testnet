@@ -57,15 +57,10 @@ else
 fi
 
 # Tạo virtual environment
-$PYTHON_CMD -m venv .venv
+rm -rf .venv/  # Linux/macOS
+python -m venv .venv
 source .venv/bin/activate
-
-# Cài đặt PyTorch 2.6.0 và các phụ thuộc
-pip install --upgrade --no-cache-dir \
-    torch==2.6.0 \
-    torchvision==0.16.0 \
-    torchaudio==2.6.0 \
-    --index-url https://download.pytorch.org/whl/cpu
+pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cpu
 
 # Fix lỗi Hivemind training
 cat > hivemind_fix.py <<EOF
