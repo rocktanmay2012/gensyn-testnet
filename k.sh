@@ -13,7 +13,7 @@ TEMP_DATA_PATH="$SWARM_DIR/modal-login/temp-data"
 HOME_DIR="$HOME"
 
   clear
-    echo -e "${BOLD}${CYAN}"
+   # echo -e "${BOLD}${CYAN}"
     echo "###################################################"
     echo "#   KIỂM TRA THÀNH VIÊN NHÓM TELEGRAM TRƯỚC KHI   #"
     echo "#         TIẾP TỤC CÀI ĐẶT RL-SWARM               #"
