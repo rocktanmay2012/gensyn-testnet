@@ -10,15 +10,26 @@ SWARM_DIR="$HOME/rl-swarm"
 TEMP_DATA_PATH="$SWARM_DIR/modal-login/temp-data"
 HOME_DIR="$HOME"
 
-# Hàm kiểm tra và cài đặt Python 3.10
+cd $HOME || exit
+
+# Hàm cài đặt Python 3.10
 install_python310() {
     echo -e "${BOLD}${YELLOW}[!] Installing Python 3.10...${NC}"
-    sudo add-apt-repository ppa:deadsnakes/ppa -y
-    sudo apt update
-    sudo apt install -y python3.10 python3.10-venv
+    
+    # Thử cài từ deadsnakes PPA trước
+    if ! sudo add-apt-repository ppa:deadsnakes/ppa -y > /dev/null 2>&1; then
+        echo -e "${BOLD}${RED}[✗] Failed to add deadsnakes PPA${NC}"
+        return 1
+    fi
+    
+    sudo apt update > /dev/null 2>&1
+    if ! sudo apt install -y python3.10 python3.10-venv > /dev/null 2>&1; then
+        echo -e "${BOLD}${RED}[✗] Failed to install Python 3.10 from PPA${NC}"
+        return 1
+    fi
+    
+    return 0
 }
-
-
 
 # Xử lý swarm.pem
 if [ -f "$SWARM_DIR/swarm.pem" ]; then
@@ -67,56 +78,50 @@ fi
 
 echo -e "${BOLD}${YELLOW}[✓] Setting up Python virtual environment...${NC}"
 
+# Kiểm tra và cài đặt Python 3.10 nếu cần
+if ! command -v python3.10 &> /dev/null; then
+    echo -e "${BOLD}${RED}[✗] python3.10 not found. Attempting to install...${NC}"
+    
+    # Thử cài đặt Python 3.10
+    if ! install_python310; then
+        echo -e "${BOLD}${YELLOW}[!] Falling back to available Python version...${NC}"
+        PYTHON_CMD=$(command -v python3 || command -v python)
+        
+        if [ -z "$PYTHON_CMD" ]; then
+            echo -e "${BOLD}${RED}[✗] No Python interpreter found. Please install Python manually.${NC}"
+            exit 1
+        fi
+        
+        echo -e "${BOLD}${YELLOW}[!] Using ${PYTHON_CMD} instead of python3.10${NC}"
+        python3 -m venv .venv || {
+            echo -e "${BOLD}${RED}[✗] Failed to create virtual environment${NC}"
+            exit 1
+        }
+    fi
+fi
+
 # Tạo virtual environment
-$PYTHON_CMD -m venv .venv
-source .venv/bin/activate
+python3.10 -m venv .venv || {
+    echo -e "${BOLD}${RED}[✗] Failed to create virtual environment with python3.10, trying fallback...${NC}"
+    python3 -m venv .venv || {
+        echo -e "${BOLD}${RED}[✗] Completely failed to create virtual environment${NC}"
+        exit 1
+    }
+}
 
-# Cài đặt PyTorch 2.6.0 và các phụ thuộc
-pip install --upgrade --no-cache-dir \
-    torch==2.6.0 \
-    torchvision==0.16.0 \
-    torchaudio==2.6.0 \
-    --index-url https://download.pytorch.org/whl/cpu
+source .venv/bin/activate || {
+    echo -e "${BOLD}${RED}[✗] Failed to activate virtual environment${NC}"
+    exit 1
+}
 
-# Fix lỗi Hivemind training
-cat > hivemind_fix.py <<EOF
-from transformers import TrainerCallback
+echo -e "${BOLD}${YELLOW}[✓] Removing previous PyTorch installations...${NC}"
+pip uninstall -y torch torchvision torchaudio 2>/dev/null || true
 
-class FixCacheCallback(TrainerCallback):
-    def on_train_begin(self, args, state, control, **kwargs):
-        model = kwargs.get('model')
-        if model:
-            model.config.use_cache = False
-            if not hasattr(model.config, 'gradient_checkpointing'):
-                model.config.gradient_checkpointing = True
+echo -e "${BOLD}${YELLOW}[✓] Installing fresh PyTorch packages...${NC}"
+pip install --upgrade --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu || {
+    echo -e "${BOLD}${RED}[✗] Failed to install PyTorch${NC}"
+    exit 1
+}
 
-    def on_step_end(self, args, state, control, **kwargs):
-        outputs = kwargs.get('outputs')
-        if outputs and 'loss' not in outputs:
-            raise ValueError("Missing training outputs - check data paths")
-EOF
-
-# Chạy training với fix
-echo -e "${GREEN}Starting training with fixes...${NC}"
-python -c "
-from hivemind_fix import FixCacheCallback
-from transformers import TrainingArguments
-
-args = TrainingArguments(
-    output_dir='./results',
-    gradient_checkpointing=True,
-    per_device_train_batch_size=4,
-    logging_steps=10
-)
-
-trainer = YourTrainerClass(
-    model=model,
-    args=args,
-    train_dataset=train_data,
-    callbacks=[FixCacheCallback()]
-)
-
-trainer.train()
-"
-
+echo -e "${BOLD}${YELLOW}[✓] Running rl-swarm...${NC}"
 ./run_rl_swarm.sh
