@@ -25,9 +25,12 @@ echo " YOU HAVE NOT JOINED THE REQUIRED TELEGRAM GROUP!"
 echo ""
 echo ""
 echo -e "${BOLD}${CYAN}👉 $TELEGRAM_GROUP_LINK 👈${NC}${YELLOW}"
+echo ""
+echo "PRESS ANY KEY TO CONTINUE THE INSTALLATION PROCESS"
 echo "===================================================="
 echo -e "${NC}"
 read -n 1 -s -r -p ""
+
 
 # Hàm kiểm tra và cài đặt Python 3.10
 install_python310() {
