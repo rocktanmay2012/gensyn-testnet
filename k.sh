@@ -10,14 +10,6 @@ SWARM_DIR="$HOME/rl-swarm"
 TEMP_DATA_PATH="$SWARM_DIR/modal-login/temp-data"
 HOME_DIR="$HOME"
 
-# Hàm kiểm tra và cài đặt Python 3.10
-install_python310() {
-    echo -e "${BOLD}${YELLOW}[!] Installing Python 3.10...${NC}"
-    sudo add-apt-repository ppa:deadsnakes/ppa -y
-    sudo apt update
-    sudo apt install -y python3.10 python3.10-venv
-}
-
 cd $HOME
 
 if [ -f "$SWARM_DIR/swarm.pem" ]; then
@@ -64,66 +56,9 @@ if [ -n "$VIRTUAL_ENV" ]; then
     deactivate
 fi
 
-# Cài đặt Python 3.10 nếu chưa có
-if ! command -v python3.10 &> /dev/null; then
-    install_python310 || {
-        echo -e "${RED}Fallback to python3${NC}"
-        PYTHON_CMD="python3"
-    }
-else
-    PYTHON_CMD="python3.10"
-fi
-
-# Tạo virtual environment
-$PYTHON_CMD -m venv .venv
+echo -e "${BOLD}${YELLOW}[✓] Setting up Python virtual environment...${NC}"
+python3.10 -m venv .venv
 source .venv/bin/activate
-
-# Cài đặt PyTorch 2.6.0 và các phụ thuộc
-pip install --upgrade --no-cache-dir \
-    torch==2.6.0 \
-    torchvision==0.16.0 \
-    torchaudio==2.6.0 \
-    --index-url https://download.pytorch.org/whl/cpu
-
-# Fix lỗi Hivemind training
-cat > hivemind_fix.py <<EOF
-from transformers import TrainerCallback
-
-class FixCacheCallback(TrainerCallback):
-    def on_train_begin(self, args, state, control, **kwargs):
-        model = kwargs.get('model')
-        if model:
-            model.config.use_cache = False
-            if not hasattr(model.config, 'gradient_checkpointing'):
-                model.config.gradient_checkpointing = True
-
-    def on_step_end(self, args, state, control, **kwargs):
-        outputs = kwargs.get('outputs')
-        if outputs and 'loss' not in outputs:
-            raise ValueError("Missing training outputs - check data paths")
-EOF
-
-# Chạy training với fix
-echo -e "${GREEN}Starting training with fixes...${NC}"
-python -c "
-from hivemind_fix import FixCacheCallback
-from transformers import TrainingArguments
-
-args = TrainingArguments(
-    output_dir='./results',
-    gradient_checkpointing=True,
-    per_device_train_batch_size=4,
-    logging_steps=10
-)
-
-trainer = YourTrainerClass(
-    model=model,
-    args=args,
-    train_dataset=train_data,
-    callbacks=[FixCacheCallback()]
-)
-
-trainer.train()
-"
-
+pip install --upgrade torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+echo -e "${BOLD}${YELLOW}[✓] Running rl-swarm...${NC}"
 ./run_rl_swarm.sh
