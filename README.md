@@ -86,16 +86,6 @@ screen -S gensyn
 cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/cpu.sh && ./gensyn-testnet/cpu.sh
 ```
 
-⚠️6. **"If the installation process ends with an error! [Please run this command again]."**⚠️
-```bash
-cd rl-swarm
-python3 -m venv .venv
-source .venv/bin/activate
-sudo ./run_rl_swarm.sh
-```
-
-
-
 - It will ask some questions, you should send response properly
 - ```Would you like to connect to the Testnet? [Y/n]``` : Write `Y`
 - ```Would you like to push models you train in the RL swarm to the Hugging Face Hub? [y/N]``` : Write `N`
