@@ -57,8 +57,9 @@ if [ -n "$VIRTUAL_ENV" ]; then
 fi
 
 echo -e "${BOLD}${YELLOW}[✓] Setting up Python virtual environment...${NC}"
-python3.10 -m venv .venv
+rm -rf .venv/  # Linux/macOS
+python3 -m venv .venv
 source .venv/bin/activate
-pip install --upgrade torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cpu
 echo -e "${BOLD}${YELLOW}[✓] Running rl-swarm...${NC}"
 ./run_rl_swarm.sh
