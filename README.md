@@ -83,7 +83,7 @@ screen -S gensyn
 ```
 5. **Create a screen session**
 ```bash
-cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/k.sh && ./gensyn-testnet/k.sh
+cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/cpu.sh && ./gensyn-testnet/cpu.sh
 ```
 
 ⚠️6. **"If the installation process ends with an error! [Please run this command again]."**⚠️
