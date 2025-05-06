@@ -1,3 +1,12 @@
+
+BOLD="\e[1m"
+RED="\e[31m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
+CYAN="\e[36m"
+NC="\e[0m"
+
 while true; do
     clear
     echo -e "${BOLD}${CYAN}"
