@@ -1,14 +1,35 @@
 #!/bin/bash
-
 BOLD="\e[1m"
 RED="\e[31m"
 GREEN="\e[32m"
 YELLOW="\e[33m"
+BLUE="\e[34m"
+CYAN="\e[36m"
 NC="\e[0m"
 
 SWARM_DIR="$HOME/rl-swarm"
 TEMP_DATA_PATH="$SWARM_DIR/modal-login/temp-data"
 HOME_DIR="$HOME"
+TELEGRAM_GROUP_LINK="https://t.me/Nexgenexplore" 
+
+
+clear
+echo -e "${BOLD}${CYAN}"
+echo "###################################################"
+echo "#   JOIN THE TELEGRAM COMMUNITY FOR MORE SUPPORT  #" 
+echo "###################################################"
+echo -e "${NC}"
+echo -e "${YELLOW}"
+echo "===================================================="
+echo " YOU HAVE NOT JOINED THE REQUIRED TELEGRAM GROUP!"
+echo ""
+echo ""
+echo -e "${BOLD}${CYAN}👉 $TELEGRAM_GROUP_LINK 👈${NC}${YELLOW}"
+echo ""
+echo "PRESS ANY KEY TO CONTINUE THE INSTALLATION PROCESS"
+echo "===================================================="
+echo -e "${NC}"
+read -n 1 -s -r -p ""
 
 # Hàm kiểm tra và cài đặt Python 3.10
 install_python310() {
