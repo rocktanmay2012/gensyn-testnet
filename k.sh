@@ -18,43 +18,54 @@ install_python310() {
     sudo apt install -y python3.10 python3.10-venv
 }
 
+
+
 # Xử lý swarm.pem
 if [ -f "$SWARM_DIR/swarm.pem" ]; then
-    echo -e "${BOLD}${YELLOW}Existing swarm.pem detected. Choose:${NC}"
-    echo -e "1) Keep existing"
-    echo -e "2) Delete and start fresh"
-    read -p "Choice (1/2): " choice
-    case $choice in
-        1) 
+    echo -e "${BOLD}${YELLOW}You already have an existing ${GREEN}swarm.pem${YELLOW} file.${NC}\n"
+    echo -e "${BOLD}${YELLOW}Do you want to:${NC}"
+    echo -e "${BOLD}1) Use the existing swarm.pem${NC}"
+    echo -e "${BOLD}${RED}2) Delete existing swarm.pem and start fresh${NC}"
+
+    while true; do
+        read -p $'\e[1mEnter your choice (1 or 2): \e[0m' choice
+        if [ "$choice" == "1" ]; then
+            echo -e "\n${BOLD}${YELLOW}[✓] Using existing swarm.pem...${NC}"
             mv "$SWARM_DIR/swarm.pem" "$HOME_DIR/"
+            mv "$TEMP_DATA_PATH/userData.json" "$HOME_DIR/" 2>/dev/null
+            mv "$TEMP_DATA_PATH/userApiKey.json" "$HOME_DIR/" 2>/dev/null
+
             rm -rf "$SWARM_DIR"
-            git clone https://github.com/whalepiz/rl-swarm.git
+
+            echo -e "${BOLD}${YELLOW}[✓] Cloning fresh repository...${NC}"
+            cd $HOME && git clone https://github.com/whalepiz/rl-swarm.git > /dev/null 2>&1
+
             mv "$HOME_DIR/swarm.pem" rl-swarm/
-            ;;
-        2) 
+            mv "$HOME_DIR/userData.json" rl-swarm/modal-login/temp-data/ 2>/dev/null
+            mv "$HOME_DIR/userApiKey.json" rl-swarm/modal-login/temp-data/ 2>/dev/null
+            break
+        elif [ "$choice" == "2" ]; then
+            echo -e "${BOLD}${YELLOW}[✓] Removing existing folder and starting fresh...${NC}"
             rm -rf "$SWARM_DIR"
-            git clone https://github.com/whalepiz/rl-swarm.git
-            ;;
-        *) 
-            echo -e "${RED}Invalid choice. Exiting.${NC}"
-            exit 1
-            ;;
-    esac
+            cd $HOME && git clone https://github.com/whalepiz/rl-swarm.git > /dev/null 2>&1
+            break
+        else
+            echo -e "\n${BOLD}${RED}[✗] Invalid choice. Please enter 1 or 2.${NC}"
+        fi
+    done
 else
-    git clone https://github.com/whalepiz/rl-swarm.git
+    echo -e "${BOLD}${YELLOW}[✓] No existing swarm.pem found. Cloning repository...${NC}"
+    cd $HOME && { [ -d rl-swarm ] && rm -rf rl-swarm; } && git clone https://github.com/whalepiz/rl-swarm.git > /dev/null 2>&1
 fi
 
-cd rl-swarm || exit 1
+cd rl-swarm || { echo -e "${BOLD}${RED}[✗] Failed to enter rl-swarm directory. Exiting.${NC}"; exit 1; }
 
-# Cài đặt Python 3.10 nếu chưa có
-if ! command -v python3.10 &> /dev/null; then
-    install_python310 || {
-        echo -e "${RED}Fallback to python3${NC}"
-        PYTHON_CMD="python3"
-    }
-else
-    PYTHON_CMD="python3.10"
+if [ -n "$VIRTUAL_ENV" ]; then
+    echo -e "${BOLD}${YELLOW}[✓] Deactivating existing virtual environment...${NC}"
+    deactivate
 fi
+
+echo -e "${BOLD}${YELLOW}[✓] Setting up Python virtual environment...${NC}"
 
 # Tạo virtual environment
 $PYTHON_CMD -m venv .venv
