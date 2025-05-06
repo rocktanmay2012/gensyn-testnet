@@ -7,7 +7,7 @@ BLUE="\e[34m"
 CYAN="\e[36m"
 NC="\e[0m"
 
-while true; do
+
     clear
     echo -e "${BOLD}${CYAN}"
     echo "###################################################"
@@ -27,4 +27,4 @@ while true; do
         echo "===================================================="
         echo -e "${NC}"
         read -n 1 -s -r -p ""
-done
+
