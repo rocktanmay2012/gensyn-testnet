@@ -86,7 +86,7 @@ screen -S gensyn
 cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/cpu.sh && ./gensyn-testnet/cpu.sh
 ```
 
-6. **"If the installation process ends with an error! [Please run this command again]."**
+⚠️6. **"If the installation process ends with an error! [Please run this command again]."**⚠️
 ```bash
 cd rl-swarm
 python3 -m venv .venv
