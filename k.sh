@@ -10,6 +10,14 @@ SWARM_DIR="$HOME/rl-swarm"
 TEMP_DATA_PATH="$SWARM_DIR/modal-login/temp-data"
 HOME_DIR="$HOME"
 
+# Hàm kiểm tra và cài đặt Python 3.10
+install_python310() {
+    echo -e "${BOLD}${YELLOW}[!] Installing Python 3.10...${NC}"
+    sudo add-apt-repository ppa:deadsnakes/ppa -y
+    sudo apt update
+    sudo apt install -y python3.10 python3.10-venv
+}
+
 cd $HOME
 
 if [ -f "$SWARM_DIR/swarm.pem" ]; then
