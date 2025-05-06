@@ -30,7 +30,7 @@ HOME_DIR="$HOME"
         echo " Sau khi tham gia, nhấn phím bất kỳ để kiểm tra lại!"
         echo "===================================================="
         echo -e "${NC}"
-        read -n 1 -s -r -p ""
+       # read -n 1 -s -r -p ""
 
 # Hàm kiểm tra và cài đặt Python 3.10
 install_python310() {
