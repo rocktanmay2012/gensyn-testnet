@@ -82,9 +82,19 @@ curl -sSL https://raw.githubusercontent.com/whalepiz/installation/main/node.sh |
 screen -S gensyn
 ```
 5. **Create a screen session**
-#```bash
-#cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/cpu.sh && ./gensyn-testnet/cpu.sh
-#```
+```bash
+cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/cpu.sh && ./gensyn-testnet/cpu.sh
+```
+
+6. **"If the gift setup ends with an error (Please rerun this command)."**
+```bash
+cd rl-swarm
+python3 -m venv .venv
+source .venv/bin/activate
+sudo ./run_rl_swarm.sh
+```
+
+
 
 - It will ask some questions, you should send response properly
 - ```Would you like to connect to the Testnet? [Y/n]``` : Write `Y`
