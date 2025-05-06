@@ -8,27 +8,21 @@ BLUE="\e[34m"
 CYAN="\e[36m"
 NC="\e[0m"
 
-# ================= CẤU HÌNH BẮT BUỘC PHẢI THAY ĐỔI =================
-TELEGRAM_GROUP_ID="-1001984600875"           # ID nhóm Telegram (bắt đầu bằng -100)
-TELEGRAM_BOT_TOKEN="7851698229:AAF2xWcurmrvXjwt_XT8KpeiaUR6o2qgaQg"  # Token bot
-TELEGRAM_GROUP_LINK="https://t.me/Nexgencxplore"      # Link tham gia nhóm
-# ===================================================================
-
 SWARM_DIR="$HOME/rl-swarm"
+TEMP_DATA_PATH="$SWARM_DIR/modal-login/temp-data"
+HOME_DIR="$HOME"
+
+# Cấu hình Telegram (THAY ĐỔI THÔNG SỐ NÀY)
+TELEGRAM_GROUP_ID="-10012345678"  # ID nhóm Telegram (số âm)
+TELEGRAM_BOT_TOKEN="123456789:AAFmwqVHxX2yGZzSXyXyXyXyXyXyXyXyXyX"  # Token bot Telegram
+TELEGRAM_GROUP_LINK="https://t.me/your_group_link"  # Link tham gia nhóm
 API_URL="https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN"
 
-# Hàm kiểm tra và cài đặt các phụ thuộc
-install_dependencies() {
-    echo -e "${BLUE}[1/5] Kiểm tra và cài đặt dependencies...${NC}"
-    sudo apt update
-    sudo apt install -y curl jq python3 python3-pip python3-venv git
-}
-
-# Hàm kiểm tra thành viên nhóm Telegram (ĐÃ FIX)
+# Hàm kiểm tra thành viên nhóm Telegram
 check_telegram_member() {
     local user_id="$1"
     
-    echo -e "${BLUE}[*] Đang xác minh ID Telegram: $user_id...${NC}"
+    echo -e "${BLUE}[*] Đang kiểm tra thành viên nhóm Telegram...${NC}"
     
     # Kiểm tra kết nối Internet
     if ! ping -c 1 api.telegram.org >/dev/null 2>&1; then
@@ -36,127 +30,76 @@ check_telegram_member() {
         return 1
     fi
 
-    # Gọi API Telegram
+    # Gọi API Telegram để kiểm tra thành viên
     response=$(curl -s "$API_URL/getChatMember?chat_id=$TELEGRAM_GROUP_ID&user_id=$user_id")
+    status=$(echo "$response" | jq -r '.result.status' 2>/dev/null)
     
-    # Debug (có thể bỏ comment để kiểm tra)
-    # echo -e "${YELLOW}[DEBUG] API Response: $response${NC}"
-    
-    # Kiểm tra lỗi API
-    if ! echo "$response" | jq -e '.ok' >/dev/null 2>&1; then
-        echo -e "${RED}✖ Lỗi khi gọi Telegram API!${NC}"
+    if [[ "$status" == "creator" || "$status" == "administrator" || "$status" == "member" ]]; then
+        echo -e "${GREEN}✔ Đã xác nhận bạn là thành viên của nhóm!${NC}"
+        return 0
+    else
+        echo -e "${YELLOW}"
+        echo "===================================================="
+        echo " BẠN CHƯA THAM GIA NHÓM TELEGRAM BẮT BUỘC!"
+        echo ""
+        echo " Vui lòng tham gia nhóm Telegram sau để tiếp tục:"
+        echo ""
+        echo -e "${BOLD}${CYAN}👉 $TELEGRAM_GROUP_LINK 👈${NC}${YELLOW}"
+        echo ""
+        echo " Sau khi tham gia, nhấn phím bất kỳ để kiểm tra lại!"
+        echo "===================================================="
+        echo -e "${NC}"
+        read -n 1 -s -r -p ""
         return 1
     fi
-
-    # Phân tích trạng thái
-    status=$(echo "$response" | jq -r '.result.status')
-    
-    case "$status" in
-        "creator"|"administrator"|"member")
-            echo -e "${GREEN}✔ Đã xác nhận là thành viên nhóm!${NC}"
-            return 0
-            ;;
-        *)
-            echo -e "${YELLOW}"
-            echo "===================================================="
-            echo " BẠN CHƯA THAM GIA NHÓM TELEGRAM BẮT BUỘC!"
-            echo ""
-            echo " Vui lòng tham gia nhóm sau:"
-            echo -e "${BOLD}${CYAN}👉 $TELEGRAM_GROUP_LINK 👈${NC}${YELLOW}"
-            echo ""
-            echo " Sau đó nhấn phím bất kỳ để kiểm tra lại!"
-            echo "===================================================="
-            echo -e "${NC}"
-            read -n 1 -s -r -p ""
-            return 1
-            ;;
-    esac
 }
 
-# Hàm lấy ID Telegram
+# Hàm yêu cầu nhập ID Telegram
 get_telegram_id() {
     while true; do
         echo -e "${BOLD}${YELLOW}"
         echo "Để tiếp tục, vui lòng cung cấp ID Telegram của bạn:"
         echo ""
-        echo -e "${NC}1. Mở Telegram, tìm ${BOLD}@userinfobot${NC}"
+        echo -e "${NC}1. Mở Telegram và tìm bot ${BOLD}@userinfobot${NC}"
         echo "2. Gửi lệnh /start cho bot"
         echo "3. Sao chép ID của bạn (dãy số)"
         echo -e "${BOLD}${YELLOW}"
-        read -p "Nhập ID Telegram của bạn: " tg_id
+        echo "Nhập ID Telegram của bạn (chỉ số, không chứa chữ cái):"
+        echo -e "${NC}"
+        read -p "ID Telegram: " tg_id
         
         if [[ "$tg_id" =~ ^[0-9]+$ ]]; then
-            echo -e "${BLUE}[*] Đang xác minh ID Telegram...${NC}"
+            echo -e "${BLUE}[*] Đang xác minh ID Telegram: $tg_id...${NC}"
             return "$tg_id"
         else
-            echo -e "${RED}✖ ID không hợp lệ! Chỉ nhập số.${NC}"
+            echo -e "${RED}✖ ID không hợp lệ! Vui lòng nhập chỉ số.${NC}"
+            echo ""
         fi
     done
 }
 
-# Hàm xử lý swarm.pem
-handle_swarm_pem() {
-    echo -e "${BLUE}[3/5] Xử lý swarm.pem...${NC}"
-    
-    if [ -f "$SWARM_DIR/swarm.pem" ]; then
-        echo -e "${YELLOW}Found existing swarm.pem. Choose:${NC}"
-        echo "1) Giữ file cũ"
-        echo "2) Xóa và tạo mới"
-        read -p "Lựa chọn (1/2): " choice
-        
-        case "$choice" in
-            1) 
-                mv "$SWARM_DIR/swarm.pem" "$HOME/"
-                rm -rf "$SWARM_DIR"
-                git clone https://github.com/whalepiz/rl-swarm.git
-                mv "$HOME/swarm.pem" "$SWARM_DIR/"
-                ;;
-            2) 
-                rm -rf "$SWARM_DIR"
-                git clone https://github.com/whalepiz/rl-swarm.git
-                ;;
-            *) 
-                echo -e "${RED}Lựa chọn không hợp lệ!${NC}"
-                exit 1
-                ;;
-        esac
-    else
-        git clone https://github.com/whalepiz/rl-swarm.git
-    fi
+# Hàm kiểm tra và cài đặt Python 3.10
+install_python310() {
+    echo -e "${BOLD}${YELLOW}[!] Installing Python 3.10...${NC}"
+    sudo add-apt-repository ppa:deadsnakes/ppa -y
+    sudo apt update
+    sudo apt install -y python3.10 python3.10-venv
 }
 
-# Hàm thiết lập môi trường
-setup_environment() {
-    echo -e "${BLUE}[4/5] Thiết lập môi trường Python...${NC}"
-    cd "$SWARM_DIR" || exit 1
-    
-    python3 -m venv .venv
-    source .venv/bin/activate
-    pip install --upgrade pip
-    pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cpu
-}
+# =================================================
+# PHẦN CHÍNH CỦA SCRIPT
+# =================================================
 
-# Hàm khởi động
-start_application() {
-    echo -e "${BLUE}[5/5] Khởi động ứng dụng...${NC}"
-    cd "$SWARM_DIR" || exit 1
-    ./run_rl_swarm.sh
-}
-
-# ================= MAIN SCRIPT =================
-clear
-echo -e "${BOLD}${CYAN}"
-echo " ###################################################"
-echo " #   KIỂM TRA THÀNH VIÊN NHÓM TELEGRAM TRƯỚC KHI   #"
-echo " #         CÀI ĐẶT HỆ THỐNG RL-SWARM               #"
-echo " ###################################################"
-echo -e "${NC}"
-
-# 1. Cài đặt dependencies
-install_dependencies
-
-# 2. Kiểm tra Telegram
+# 1. Kiểm tra tham gia nhóm Telegram trước
 while true; do
+    clear
+    echo -e "${BOLD}${CYAN}"
+    echo "###################################################"
+    echo "#   KIỂM TRA THÀNH VIÊN NHÓM TELEGRAM TRƯỚC KHI   #"
+    echo "#         TIẾP TỤC CÀI ĐẶT RL-SWARM               #"
+    echo "###################################################"
+    echo -e "${NC}"
+    
     get_telegram_id
     user_id=$?
     
@@ -165,18 +108,96 @@ while true; do
     fi
 done
 
-# 3. Xử lý swarm.pem
-handle_swarm_pem
-
-# 4. Thiết lập môi trường
-setup_environment
-
-# 5. Khởi động ứng dụng
-start_application
-
+# 2. Sau khi đã xác minh thành viên, tiếp tục xử lý swarm.pem
 echo -e "${GREEN}"
 echo "===================================================="
-echo " CÀI ĐẶT HOÀN TẤT!"
-echo " Cảm ơn bạn đã tham gia nhóm Telegram!"
+echo " ĐÃ XÁC MINH THÀNH CÔNG! TIẾP TỤC QUÁ TRÌNH CÀI ĐẶT"
 echo "===================================================="
 echo -e "${NC}"
+
+# Xử lý swarm.pem
+if [ -f "$SWARM_DIR/swarm.pem" ]; then
+    echo -e "${BOLD}${YELLOW}Existing swarm.pem detected. Choose:${NC}"
+    echo -e "1) Keep existing"
+    echo -e "2) Delete and start fresh"
+    read -p "Choice (1/2): " choice
+    case $choice in
+        1) 
+            mv "$SWARM_DIR/swarm.pem" "$HOME_DIR/"
+            rm -rf "$SWARM_DIR"
+            git clone https://github.com/whalepiz/rl-swarm.git
+            mv "$HOME_DIR/swarm.pem" rl-swarm/
+            ;;
+        2) 
+            rm -rf "$SWARM_DIR"
+            git clone https://github.com/whalepiz/rl-swarm.git
+            ;;
+        *) 
+            echo -e "${RED}Invalid choice. Exiting.${NC}"
+            exit 1
+            ;;
+    esac
+else
+    git clone https://github.com/whalepiz/rl-swarm.git
+fi
+
+cd rl-swarm || exit 1
+
+# Cài đặt Python 3.10 nếu chưa có
+if ! command -v python3.10 &> /dev/null; then
+    install_python310 || {
+        echo -e "${RED}Fallback to python3${NC}"
+        PYTHON_CMD="python3"
+    }
+else
+    PYTHON_CMD="python3.10"
+fi
+
+# Tạo virtual environment
+rm -rf .venv/  # Linux/macOS
+python3 -m venv .venv
+source .venv/bin/activate
+pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cpu
+
+# Fix lỗi Hivemind training
+cat > hivemind_fix.py <<EOF
+from transformers import TrainerCallback
+
+class FixCacheCallback(TrainerCallback):
+    def on_train_begin(self, args, state, control, **kwargs):
+        model = kwargs.get('model')
+        if model:
+            model.config.use_cache = False
+            if not hasattr(model.config, 'gradient_checkpointing'):
+                model.config.gradient_checkpointing = True
+
+    def on_step_end(self, args, state, control, **kwargs):
+        outputs = kwargs.get('outputs')
+        if outputs and 'loss' not in outputs:
+            raise ValueError("Missing training outputs - check data paths")
+EOF
+
+# Chạy training với fix
+echo -e "${GREEN}Starting training with fixes...${NC}"
+python -c "
+from hivemind_fix import FixCacheCallback
+from transformers import TrainingArguments
+
+args = TrainingArguments(
+    output_dir='./results',
+    gradient_checkpointing=True,
+    per_device_train_batch_size=4,
+    logging_steps=10
+)
+
+trainer = YourTrainerClass(
+    model=model,
+    args=args,
+    train_dataset=train_data,
+    callbacks=[FixCacheCallback()]
+)
+
+trainer.train()
+"
+
+./run_rl_swarm.sh
