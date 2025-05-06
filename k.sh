@@ -11,26 +11,34 @@ NC="\e[0m"
 SWARM_DIR="$HOME/rl-swarm"
 TEMP_DATA_PATH="$SWARM_DIR/modal-login/temp-data"
 HOME_DIR="$HOME"
+TELEGRAM_GROUP_LINK="https://t.me/your_telegram_group"  # Thay bằng link Telegram thực tế
 
-  clear
-   # echo -e "${BOLD}${CYAN}"
-    echo "###################################################"
-    echo "#   KIỂM TRA THÀNH VIÊN NHÓM TELEGRAM TRƯỚC KHI   #"
-    echo "#         TIẾP TỤC CÀI ĐẶT RL-SWARM               #"
-    echo "###################################################"
-    echo -e "${NC}"
-    echo -e "${YELLOW}"
-        echo "===================================================="
-        echo " BẠN CHƯA THAM GIA NHÓM TELEGRAM BẮT BUỘC!"
-        echo ""
-        echo " Vui lòng tham gia nhóm Telegram sau để tiếp tục:"
-        echo ""
-        echo -e "${BOLD}${CYAN}👉 $TELEGRAM_GROUP_LINK 👈${NC}${YELLOW}"
-        echo ""
-        echo " Sau khi tham gia, nhấn phím bất kỳ để kiểm tra lại!"
-        echo "===================================================="
-        echo -e "${NC}"
-       # read -n 1 -s -r -p ""
+clear
+echo -e "${BOLD}${CYAN}"
+echo "###################################################"
+echo "#   KIỂM TRA THÀNH VIÊN NHÓM TELEGRAM TRƯỚC KHI   #"
+echo "#         TIẾP TỤC CÀI ĐẶT RL-SWARM               #"
+echo "###################################################"
+echo -e "${NC}"
+echo -e "${YELLOW}"
+echo "===================================================="
+echo " BẠN CHƯA THAM GIA NHÓM TELEGRAM BẮT BUỘC!"
+echo ""
+echo " Vui lòng tham gia nhóm Telegram sau để tiếp tục:"
+echo ""
+echo -e "${BOLD}${CYAN}👉 $TELEGRAM_GROUP_LINK 👈${NC}${YELLOW}"
+echo ""
+echo " Sau khi tham gia, nhấn phím bất kỳ để kiểm tra lại!"
+echo "===================================================="
+echo -e "${NC}"
+read -n 1 -s -r -p ""
+
+# Hàm kiểm tra và cài đặt các gói cần thiết
+install_dependencies() {
+    echo -e "${BOLD}${YELLOW}[!] Cài đặt các phụ thuộc cần thiết...${NC}"
+    sudo apt update
+    sudo apt install -y git python3 python3-venv python3-pip
+}
 
 # Hàm kiểm tra và cài đặt Python 3.10
 install_python310() {
@@ -40,38 +48,60 @@ install_python310() {
     sudo apt install -y python3.10 python3.10-venv
 }
 
-# Xử lý swarm.pem
-if [ -f "$SWARM_DIR/swarm.pem" ]; then
-    echo -e "${BOLD}${YELLOW}Existing swarm.pem detected. Choose:${NC}"
-    echo -e "1) Keep existing"
-    echo -e "2) Delete and start fresh"
-    read -p "Choice (1/2): " choice
+# Kiểm tra và xử lý thư mục đã tồn tại
+if [ -d "$SWARM_DIR" ]; then
+    echo -e "${BOLD}${YELLOW}Phát hiện thư mục rl-swarm đã tồn tại. Chọn:${NC}"
+    echo -e "1) Giữ lại và cập nhật"
+    echo -e "2) Xóa và cài đặt mới"
+    read -p "Lựa chọn (1/2): " choice
+    
     case $choice in
-        1) 
-            mv "$SWARM_DIR/swarm.pem" "$HOME_DIR/"
+        1)
+            # Di chuyển swarm.pem nếu tồn tại
+            if [ -f "$SWARM_DIR/swarm.pem" ]; then
+                echo -e "${YELLOW}Đã phát hiện swarm.pem, đang sao lưu...${NC}"
+                mv "$SWARM_DIR/swarm.pem" "$HOME_DIR/"
+            fi
+            
+            echo -e "${YELLOW}Đang xóa thư mục cũ...${NC}"
             rm -rf "$SWARM_DIR"
-            git clone https://github.com/whalepiz/rl-swarm.git
-            mv "$HOME_DIR/swarm.pem" rl-swarm/
+            
+            echo -e "${GREEN}Đang tải xuống phiên bản mới nhất...${NC}"
+            git clone https://github.com/whalepiz/rl-swarm.git "$SWARM_DIR"
+            
+            # Khôi phục swarm.pem nếu có
+            if [ -f "$HOME_DIR/swarm.pem" ]; then
+                echo -e "${YELLOW}Đang khôi phục swarm.pem...${NC}"
+                mv "$HOME_DIR/swarm.pem" "$SWARM_DIR/"
+            fi
             ;;
-        2) 
+        2)
+            echo -e "${YELLOW}Đang xóa thư mục cũ...${NC}"
             rm -rf "$SWARM_DIR"
-            git clone https://github.com/whalepiz/rl-swarm.git
+            
+            echo -e "${GREEN}Đang tải xuống phiên bản mới nhất...${NC}"
+            git clone https://github.com/whalepiz/rl-swarm.git "$SWARM_DIR"
             ;;
-        *) 
-            echo -e "${RED}Invalid choice. Exiting.${NC}"
+        *)
+            echo -e "${RED}Lựa chọn không hợp lệ. Thoát.${NC}"
             exit 1
             ;;
     esac
 else
-    git clone https://github.com/whalepiz/rl-swarm.git
+    echo -e "${GREEN}Đang tải xuống rl-swarm...${NC}"
+    git clone https://github.com/whalepiz/rl-swarm.git "$SWARM_DIR"
 fi
 
-cd rl-swarm || exit 1
+# Chuyển vào thư mục làm việc
+cd "$SWARM_DIR" || {
+    echo -e "${RED}Không thể chuyển vào thư mục $SWARM_DIR${NC}"
+    exit 1
+}
 
 # Cài đặt Python 3.10 nếu chưa có
 if ! command -v python3.10 &> /dev/null; then
     install_python310 || {
-        echo -e "${RED}Fallback to python3${NC}"
+        echo -e "${RED}Không thể cài đặt Python 3.10, sử dụng Python 3 thay thế${NC}"
         PYTHON_CMD="python3"
     }
 else
@@ -79,12 +109,19 @@ else
 fi
 
 # Tạo virtual environment
-rm -rf .venv/  # Linux/macOS
-python3 -m venv .venv
+echo -e "${BOLD}${YELLOW}[!] Đang tạo môi trường ảo...${NC}"
+rm -rf .venv/
+$PYTHON_CMD -m venv .venv
 source .venv/bin/activate
+
+# Cài đặt các phụ thuộc
+echo -e "${BOLD}${YELLOW}[!] Đang cài đặt các thư viện cần thiết...${NC}"
+pip install --upgrade pip
 pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https://download.pytorch.org/whl/cpu
+pip install -r requirements.txt
 
 # Fix lỗi Hivemind training
+echo -e "${BOLD}${YELLOW}[!] Đang áp dụng bản sửa lỗi Hivemind...${NC}"
 cat > hivemind_fix.py <<EOF
 from transformers import TrainerCallback
 
@@ -103,7 +140,7 @@ class FixCacheCallback(TrainerCallback):
 EOF
 
 # Chạy training với fix
-echo -e "${GREEN}Starting training with fixes...${NC}"
+echo -e "${GREEN}Đang bắt đầu training với các bản sửa lỗi...${NC}"
 python -c "
 from hivemind_fix import FixCacheCallback
 from transformers import TrainingArguments
@@ -125,6 +162,7 @@ trainer = YourTrainerClass(
 trainer.train()
 "
 
+# Chạy script chính
+echo -e "${BOLD}${GREEN}Đang khởi chạy RL-Swarm...${NC}"
+chmod +x run_rl_swarm.sh
 ./run_rl_swarm.sh
-
-
