@@ -77,4 +77,4 @@ pip install torch==2.2.1 torchvision==0.17.1 torchaudio==2.2.1 --index-url https
 
 echo -e "${BOLD}${YELLOW}[✓] Running rl-swarm...${NC}"
 chmod +x run_rl_swarm.sh || { echo -e "${BOLD}${RED}[✗] Failed to make run_rl_swarm.sh executable.${NC}"; exit 1; }
-./run_rl_swarm.sh
+CPU_ONLY=true ./run_rl_swarm.sh
