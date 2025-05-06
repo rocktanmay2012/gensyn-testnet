@@ -82,9 +82,9 @@ curl -sSL https://raw.githubusercontent.com/whalepiz/installation/main/node.sh |
 screen -S gensyn
 ```
 5. **Create a screen session**
-```bash
-cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/cpu.sh && ./gensyn-testnet/cpu.sh
-```
+#```bash
+#cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/cpu.sh && ./gensyn-testnet/cpu.sh
+#```
 
 - It will ask some questions, you should send response properly
 - ```Would you like to connect to the Testnet? [Y/n]``` : Write `Y`
