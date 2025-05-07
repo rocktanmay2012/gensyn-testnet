@@ -74,7 +74,9 @@ sudo apt update && sudo apt install -y python3 python3-venv python3-pip curl wge
 ```
 3. **Install Node.js and npm if not installed already**  
 ```bash
-curl -sSL https://raw.githubusercontent.com/whalepiz/installation/main/node.sh | bash
+sudo apt-get update
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt-get install -y nodejs
 ```
 
 4. **Create a screen session**
@@ -107,7 +109,9 @@ sudo apt update && sudo apt install -y python3 python3-venv python3-pip curl wge
 ```
 3. **Install Node.js and npm`**
 ```bash
-curl -sSL https://raw.githubusercontent.com/whalepiz/installation/main/node.sh | bash
+sudo apt-get update
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+sudo apt-get install -y nodejs
 ```
 4. **Create a screen session**
 ```bash
