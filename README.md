@@ -83,7 +83,12 @@ sudo apt-get install -y nodejs
 ```bash
 screen -S gensyn
 ```
-5. **Create a screen session**
+5. Delete Temp-data
+```
+[ -n "$(ls "$HOME/rl-swarm/modal-login/temp-data/"*.json 2>/dev/null)" ] && rm -f "$HOME/rl-swarm/modal-login/temp-data/"*.json 2>/dev/null || true
+```
+
+6. **Create a screen session**
 ```bash
 cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/cpu.sh && ./gensyn-testnet/cpu.sh
 ```
