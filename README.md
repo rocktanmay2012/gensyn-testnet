@@ -52,7 +52,7 @@ cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensy
 
 7. **Open login page in browser**
 
-
+1. Use the below command in the new terminal
 ```bash
 npm install -g localtunnel
 ```
