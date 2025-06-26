@@ -51,6 +51,7 @@ cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensy
 ![image](https://github.com/user-attachments/assets/8f309e0f-85a1-4474-91b9-49431b3409f0)
 
 7. **Open login page in browser**
+
 1. Use the below command in the new terminal
 
     
