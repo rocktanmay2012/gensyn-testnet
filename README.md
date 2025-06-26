@@ -1,4 +1,4 @@
-<h2 align=center>Gensyn Testnet Node Guide - CPU - GPU</h2>
+<h2 align=center>Gensyn Testnet Node Guide </h2>
 
 
 
