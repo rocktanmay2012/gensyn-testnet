@@ -78,7 +78,7 @@ curl https://loca.lt/mytunnelpassword
 ```bash
 lt --port 3000
 ```
-You will get a link like this https://smart-monkeys-rescue.loca.lt
+You will get a link like this smart-monkeys-rescue.loca.lt
 
 ![image](https://github.com/user-attachments/assets/850a5a13-2bd3-4b15-ac50-d51373e0e129)
 
