@@ -50,4 +50,4 @@ else
 fi
 
 cd rl-swarm || { echo -e "${BOLD}${RED}[✗] Failed to enter rl-swarm directory. Exiting.${NC}"; exit 1; }
-exit 0 
+exit 0  # Dừng script tại đây và giữ terminal ở thư mục rl-swarm
