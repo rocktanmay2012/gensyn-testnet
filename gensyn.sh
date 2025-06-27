@@ -50,19 +50,4 @@ else
 fi
 
 cd rl-swarm || { echo -e "${BOLD}${RED}[✗] Failed to enter rl-swarm directory. Exiting.${NC}"; exit 1; }
-
-if [ -n "$VIRTUAL_ENV" ]; then
-    echo -e "${BOLD}${YELLOW}[✓] Deactivating existing virtual environment...${NC}"
-    deactivate
-fi
-
-echo -e "${BOLD}${YELLOW}[✓] Setting up Python virtual environment...${NC}"
-python3 -m venv .venv
-source .venv/bin/activate
-
-#echo -e "${BOLD}${YELLOW}[✓] Running rl-swarm...${NC}"
-#./run_rl_swarm.sh
-
-echo -e "${BOLD}${YELLOW}[✓] Running rl-swarm...${NC}"
-chmod +x run_rl_swarm.sh || { echo -e "${BOLD}${RED}[✗] Failed to make run_rl_swarm.sh executable.${NC}"; exit 1; }
-./run_rl_swarm.sh
+exit 0 
