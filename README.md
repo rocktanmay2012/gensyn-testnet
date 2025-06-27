@@ -59,7 +59,7 @@ screen -S gensyn
 ```
 7. **Clone the Repository and Run**
 ```bash
-cd $HOME && rm -rf rl-swarm && git clone https://github.com/gensyn-ai/rl-swarm/
+cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/gensyn.sh && ./gensyn-testnet/gensyn.sh
 ```
 
 ![image](https://github.com/user-attachments/assets/8f309e0f-85a1-4474-91b9-49431b3409f0)
