@@ -1,11 +1,5 @@
 <h2 align=center>Gensyn Testnet Node Guide </h2>
 
-
-
-**Note: - For personal computers that have not installed Linux Ubuntu on Windows, follow this step. 
-        - For computers that already have Linux Ubuntu on Windows or VPS, skip this step and proceed to the Installation NODE section.**
-
-
 **Follow Me: https://x.com/WhalePiz**
 
 **Telegram Group: https://t.me/Nexgenexplore**
