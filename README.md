@@ -24,30 +24,44 @@
 ## 💻 Run node 
 1. **Install `sudo`**
 ```bash
-apt update && apt install -y sudo
+apt update && apt upgrade -y
 ```
 2. **Install other dependencies**
 ```bash
-sudo apt update && sudo apt install -y python3 python3-venv python3-pip curl wget screen git lsof nano unzip
+apt install screen curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev  -y
 ```
-3. **Install Node.js and npm`**
+3. **Install Python**
 ```bash
-sudo apt-get update
-curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
-sudo apt-get install -y nodejs
+apt install python3 python3-pip python3-venv python3-dev -y
 ```
-4. **Create a screen session**
+4.**Install Node.js and  yarn**
 ```bash
-screen -S gensyn
+apt update
+curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+apt install -y nodejs
+node -v
+npm install -g yarn
+yarn -v
 ```
-5. Delete Temp-data
+5. **Install Yarn**
+```bash
+curl -o- -L https://yarnpkg.com/install.sh | bash
 ```
-[ -n "$(ls "$HOME/rl-swarm/modal-login/temp-data/"*.json 2>/dev/null)" ] && rm -f "$HOME/rl-swarm/modal-login/temp-data/"*.json 2>/dev/null || true
+```bash
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+```
+```bash
+source ~/.bashrc
 ```
 6. **Create a screen session**
 ```bash
-cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/gensyn.sh && ./gensyn-testnet/gensyn.sh
+screen -S gensyn
 ```
+7. **Clone the Repository and Run**
+```bash
+cd $HOME && rm -rf rl-swarm && git clone https://github.com/gensyn-ai/rl-swarm/
+```
+
 ![image](https://github.com/user-attachments/assets/8f309e0f-85a1-4474-91b9-49431b3409f0)
 
 7. **Open login page in browser**
