@@ -1,7 +1,8 @@
 <h2 align=center>Gensyn Testnet Node Guide </h2>
 
-**Follow Me: https://x.com/WhalePiz**
 
+****Buy cheap GPU at : [ACCESS](https://clore.ai?ref_id=qfv4gytu)****
+**Follow Me: https://x.com/WhalePiz**
 **Telegram Group: https://t.me/Nexgenexplore**
 ## PLEASE SELECT THE HARDWARE YOU WANT TO RUN ON
 
