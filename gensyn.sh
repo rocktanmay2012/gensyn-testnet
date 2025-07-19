@@ -50,4 +50,16 @@ else
 fi
 
 cd rl-swarm || { echo -e "${BOLD}${RED}[✗] Failed to enter rl-swarm directory. Exiting.${NC}"; exit 1; }
-exit 0  # Dừng script tại đây và giữ terminal ở thư mục rl-swarm
+
+# Phần mới thêm: Tạo và kích hoạt virtual environment
+echo -e "\n${BOLD}${YELLOW}[✓] Creating Python virtual environment...${NC}"
+python3 -m venv .venv || { echo -e "${BOLD}${RED}[✗] Failed to create virtual environment.${NC}"; exit 1; }
+
+echo -e "${BOLD}${YELLOW}[✓] Activating virtual environment...${NC}"
+source .venv/bin/activate || { echo -e "${BOLD}${RED}[✗] Failed to activate virtual environment.${NC}"; exit 1; }
+
+# Chạy script chính
+echo -e "\n${BOLD}${GREEN}[✓] Starting RL Swarm...${NC}"
+./run_rl_swarm.sh || { echo -e "${BOLD}${RED}[✗] Failed to run RL Swarm.${NC}"; exit 1; }
+
+exit 0
