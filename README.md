@@ -58,8 +58,9 @@ screen -S gensyn
 ```bash
 cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/gensyn.sh && ./gensyn-testnet/gensyn.sh
 ```
+<img width="467" height="146" alt="image" src="https://github.com/user-attachments/assets/0203120d-1d0d-4e12-8ff0-8b2e1e42d8cc" />
 
-- You will get a link like this smart-monkeys-rescue.loca.lt
+- You will get a link like this slick-cars-shake.loca.lt
 - Access the website and enter your IP address as I have highlighted in red
 - Then log in with your email and return to the original terminal to continue the process
 
