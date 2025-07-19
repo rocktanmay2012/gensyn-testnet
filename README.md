@@ -64,6 +64,15 @@ cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensy
 - Access the website and enter your IP address as I have highlighted in red
 - Then log in with your email and return to the original terminal to continue the process
 
+**Answer prompts:**
+* `Would you like to push models you train in the RL swarm to the Hugging Face Hub? [y/N]` >>> Press `N` to join testnet
+  * `HuggingFace` needs `2GB` upload bandwidth for each model you train, you can press `Y`, and enter your access-token.
+* `Enter the name of the model you want to use in huggingface repo/name format, or press [Enter] to use the default model.` >>> For default model, press `Enter`  or choose one of these (More model parameters (B) need more vRAM):
+  * `Gensyn/Qwen2.5-0.5B-Instruct`
+  * `Qwen/Qwen3-0.6B`
+  * `nvidia/AceInstruct-1.5B`
+  * `dnotitia/Smoothie-Qwen3-1.7B`
+  * `Gensyn/Qwen2.5-1.5B-Instruct`
 
 # Backup Instructions for `swarm.pem`
 
