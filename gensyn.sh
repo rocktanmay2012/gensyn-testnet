@@ -1,5 +1,24 @@
 #!/bin/bash
 
+# Clear screen and display banner at top
+clear
+echo -e "\033[H"
+
+# Display colorful banner
+echo -e "\033[38;5;39m"
+cat << "EOF"
+    ██████  ██            ███████ ██     ██  █████  ██████  ███    ███
+    ██   ██ ██            ██      ██     ██ ██   ██ ██   ██ ████  ████
+    ██████  ██      █████ ███████ ██  █  ██ ███████ ██████  ██ ████ ██
+    ██   ██ ██                 ██ ██ ███ ██ ██   ██ ██   ██ ██  ██  ██
+    ██   ██ ███████       ███████  ███ ███  ██   ██ ██   ██ ██      ██
+EOF
+
+# Display custom attribution with gradient colors
+echo -ne "\033[38;5;39mB\033[38;5;45my\033[38;5;51m \033[38;5;87mP\033[38;5;129mi\033[38;5;93mz\033[38;5;99m \033[38;5;105m-\033[38;5;111m \033[38;5;117mT\033[38;5;123mG\033[38;5;129m:\033[38;5;135m \033[38;5;141mh\033[38;5;147mt\033[38;5;153mt\033[38;5;159mp\033[38;5;165ms\033[38;5;171m:\033[38;5;177m/\033[38;5;183m/\033[38;5;189mt\033[38;5;195m.\033[38;5;201mm\033[38;5;207me\033[38;5;213m/\033[38;5;219mN\033[38;5;225me\033[38;5;231mx\033[38;5;39mg\033[38;5;45me\033[38;5;51mn\033[38;5;87mg\033[38;5;129me\033[38;5;93mn\033[38;5;99mp\033[38;5;105ml\033[38;5;111mo\033[38;5;117mr\033[38;5;123me"
+echo -e "\033[0m\n"
+
+# Original script continues...
 BOLD="\e[1m"
 RED="\e[31m"
 GREEN="\e[32m"
@@ -51,14 +70,14 @@ fi
 
 cd rl-swarm || { echo -e "${BOLD}${RED}[✗] Failed to enter rl-swarm directory. Exiting.${NC}"; exit 1; }
 
-# Phần mới thêm: Tạo và kích hoạt virtual environment
+# New section: Create and activate virtual environment
 echo -e "\n${BOLD}${YELLOW}[✓] Creating Python virtual environment...${NC}"
 python3 -m venv .venv || { echo -e "${BOLD}${RED}[✗] Failed to create virtual environment.${NC}"; exit 1; }
 
 echo -e "${BOLD}${YELLOW}[✓] Activating virtual environment...${NC}"
 source .venv/bin/activate || { echo -e "${BOLD}${RED}[✗] Failed to activate virtual environment.${NC}"; exit 1; }
 
-# Chạy script chính
+# Run main script
 echo -e "\n${BOLD}${GREEN}[✓] Starting RL Swarm...${NC}"
 ./run_rl_swarm.sh || { echo -e "${BOLD}${RED}[✗] Failed to run RL Swarm.${NC}"; exit 1; }
 
