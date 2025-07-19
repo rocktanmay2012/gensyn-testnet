@@ -58,33 +58,8 @@ screen -S gensyn
 ```bash
 cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensyn-testnet.git && chmod +x gensyn-testnet/gensyn.sh && ./gensyn-testnet/gensyn.sh
 ```
-```bash
-cd ~/rl-swarm
-```
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-./run_rl_swarm.sh
-```
-![image](https://github.com/user-attachments/assets/8f309e0f-85a1-4474-91b9-49431b3409f0)
 
-8. **Open login page in browser**
-
-_**Use the below command in the new terminal**_
-
-```bash
-npm install -g localtunnel
-```
-```bash
-curl https://loca.lt/mytunnelpassword
-```
-```bash
-lt --port 3000
-```
-You will get a link like this smart-monkeys-rescue.loca.lt
-
-![image](https://github.com/user-attachments/assets/850a5a13-2bd3-4b15-ac50-d51373e0e129)
-
+- You will get a link like this smart-monkeys-rescue.loca.lt
 - Access the website and enter your IP address as I have highlighted in red
 - Then log in with your email and return to the original terminal to continue the process
 
