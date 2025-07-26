@@ -124,4 +124,6 @@ cd $HOME && rm -rf gensyn-testnet && git clone https://github.com/whalepiz/gensy
 
 You've successfully backed up the `swarm.pem` file from your VPS, WSL, or GPU server.
 
+Update coming soon...
+
 
